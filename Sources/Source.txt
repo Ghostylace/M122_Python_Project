@@ -1,0 +1,3 @@
+API Token: 9ac875596860b62aa398c2f384ff369d51f17286
+API: https://api.isthereanydeal.com/deals/v2
+API Docs: https://docs.isthereanydeal.com
