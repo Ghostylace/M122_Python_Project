@@ -11,3 +11,9 @@ class Game:
         self.cut = cut
         self.url = url
         self.expiry = expiry
+
+    def __eq__(self, other):
+        return isinstance(other, Game) and self.id == other.id
+
+    def __hash__(self):
+        return hash(self.id)
