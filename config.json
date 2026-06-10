@@ -1,3 +1,8 @@
 {
-    "APIKey" : "9ac875596860b62aa398c2f384ff369d51f17286"
+    "APIKey" : "9ac875596860b62aa398c2f384ff369d51f17286",
+    "SMTPHost" : "smtp.gmail.com",
+    "SMTPPort" : 587,
+    "SMTPMail" : "FreeLimitedGamesOnSteam@gmail.com",
+    "SMTPPassword" : "lghxpihpuiiqfean",
+    "Email" : "cescher@online.gibz.ch"
 }

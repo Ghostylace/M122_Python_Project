@@ -1,17 +1,5 @@
 [
   {
-    "id": "018d937e-f045-7103-bfc8-4b163122d21d",
-    "slug": "drift86",
-    "title": "Drift86",
-    "type": "game",
-    "mature": false,
-    "isFree": true,
-    "price": 0,
-    "cut": 100,
-    "url": "https://itad.link/019e6f5e-6dd1-73e1-bf2e-f30336d31990/",
-    "expiry": "2026-06-03T18:00:00+02:00"
-  },
-  {
     "id": "018d937f-0816-70e9-8a78-f5d015944e84",
     "slug": "gravity-circuit",
     "title": "Gravity Circuit",
@@ -34,17 +22,5 @@
     "cut": 100,
     "url": "https://itad.link/019e8518-404a-709b-ae47-a4ef949552ea/",
     "expiry": "2026-07-01T19:00:00+02:00"
-  },
-  {
-    "id": "018d937f-12e9-71ca-a5d5-f3198369f0a1",
-    "slug": "winexy",
-    "title": "Winexy",
-    "type": "game",
-    "mature": false,
-    "isFree": true,
-    "price": 0,
-    "cut": 100,
-    "url": "https://itad.link/019e8955-1b39-71e5-b056-121a559d9002/",
-    "expiry": "2026-06-05T19:00:00+02:00"
   }
 ]
