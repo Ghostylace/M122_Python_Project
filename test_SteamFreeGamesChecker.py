@@ -6,8 +6,8 @@ Tests orchestration of the entire game checking workflow.
 
 import unittest
 from unittest.mock import patch, MagicMock, call
-from SteamFreeGamesChecker import SteamFreeGamesChecker
-from Game import Game
+from Code.SteamFreeGamesChecker import SteamFreeGamesChecker
+from Code.Game import Game
 
 
 class TestSteamFreeGamesChecker(unittest.TestCase):

@@ -5,7 +5,7 @@ Tests game creation, equality, hashing, and set operations.
 """
 
 import unittest
-from Game import Game
+from Code.Game import Game
 
 
 class TestGame(unittest.TestCase):

@@ -8,8 +8,8 @@ import unittest
 import json
 import os
 from unittest.mock import patch, mock_open
-from DealCollection import DealCollection
-from Game import Game
+from Code.DealCollection import DealCollection
+from Code.Game import Game
 
 
 class TestDealCollection(unittest.TestCase):

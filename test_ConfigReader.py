@@ -9,7 +9,7 @@ import json
 import os
 import tempfile
 from unittest.mock import patch, mock_open
-from ConfigReader import ConfigReader
+from Code.ConfigReader import ConfigReader
 
 
 class TestConfigReader(unittest.TestCase):

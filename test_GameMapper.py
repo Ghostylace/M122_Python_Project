@@ -5,8 +5,8 @@ Tests mapping JSON data to Game objects from different sources.
 """
 
 import unittest
-from GameMapper import GameMapper
-from Game import Game
+from Code.GameMapper import GameMapper
+from Code.Game import Game
 
 
 class TestGameMapper(unittest.TestCase):

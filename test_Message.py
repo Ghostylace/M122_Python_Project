@@ -5,8 +5,8 @@ Tests message creation and formatting with various game scenarios.
 """
 
 import unittest
-from Message import Message
-from Game import Game
+from Code.Message import Message
+from Code.Game import Game
 
 
 class TestMessage(unittest.TestCase):

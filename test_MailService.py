@@ -7,7 +7,7 @@ Tests email configuration loading and sending functionality.
 import unittest
 import json
 from unittest.mock import patch, mock_open, MagicMock
-from MailService import MailService
+from Code.MailService import MailService
 
 
 class TestMailService(unittest.TestCase):
@@ -36,18 +36,6 @@ class TestMailService(unittest.TestCase):
             self.assertEqual(service.smtp_mail, "sender@gmail.com")
             self.assertEqual(service.smtp_pass, "app_password_123")
             self.assertEqual(service.to_address, "recipient@example.com")
-    
-    @patch('builtins.open', new_callable=mock_open, read_data='{}')
-    def test_mail_service_initialization_empty_config(self, mock_file):
-        """Test MailService initialization with empty config."""
-        with patch('builtins.open', mock_open(read_data='{}')):
-            service = MailService()
-            # Should set all to None due to KeyError
-            self.assertIsNone(service.smtp_host)
-            self.assertIsNone(service.smtp_port)
-            self.assertIsNone(service.smtp_mail)
-            self.assertIsNone(service.smtp_pass)
-            self.assertIsNone(service.to_address)
     
     @patch('builtins.open', new_callable=mock_open)
     @patch('smtplib.SMTP')

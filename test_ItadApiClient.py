@@ -6,8 +6,8 @@ Tests API client functionality for fetching free games.
 
 import unittest
 from unittest.mock import patch, MagicMock
-from ItadApiClient import ItadApiClient
-from Game import Game
+from Code.ItadApiClient import ItadApiClient
+from Code.Game import Game
 
 
 class TestItadApiClient(unittest.TestCase):
