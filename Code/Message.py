@@ -35,16 +35,17 @@ class Message:
             str: A formatted string containing the list of free games or "None"
                  if no free games are available.
         """
-        message = "Current free games:"
+        message_lines = ["Current free games:"]
         found_free_games = False
         for game in self.games:
             if game.isFree:
                 found_free_games = True
-                message += f"""
-Title: {game.title}
-Link: {game.url}
-Expiration date: {game.expiry[:10]}
-"""
+                message_lines.extend([
+                    "",
+                    f"- Title: {game.title}",
+                    f"  Link: {game.url}",
+                    f"  Expiration date: {game.expiry[:10]}"
+                ])
         if not found_free_games:
-            message += "\nNone"
-        return message
+            message_lines.append("None")
+        return "\n".join(message_lines)

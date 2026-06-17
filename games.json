@@ -22,5 +22,17 @@
     "cut": 100,
     "url": "https://itad.link/019e8518-404a-709b-ae47-a4ef949552ea/",
     "expiry": "2026-07-01T19:00:00+02:00"
+  },
+  {
+    "id": "018d937f-3cc5-7116-b8e1-06ca7ccd5d72",
+    "slug": "the-red-lantern",
+    "title": "The Red Lantern",
+    "type": "game",
+    "mature": false,
+    "isFree": true,
+    "price": 0,
+    "cut": 100,
+    "url": "https://itad.link/019eb740-63a0-7398-a518-409815ecc8e9/",
+    "expiry": "2026-06-18T19:00:00+02:00"
   }
 ]
