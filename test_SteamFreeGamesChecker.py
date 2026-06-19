@@ -33,11 +33,11 @@ class TestSteamFreeGamesChecker(unittest.TestCase):
         checker = SteamFreeGamesChecker()
         self.assertIsNotNone(checker)
     
-    @patch('MailService.MailService.send_mail')
-    @patch('DealCollection.DealCollection.load_new_games')
+    @patch('MailService.MailService.sendMail')
+    @patch('DealCollection.DealCollection.loadNewGames')
     @patch('DealCollection.DealCollection.load_games')
     @patch('ItadApiClient.ItadApiClient.fetchFreeGames')
-    @patch('ConfigReader.ConfigReader.read_config_file')
+    @patch('ConfigReader.ConfigReader.readConfigFile')
     def test_fetch_games_calls_all_components(
         self,
         mock_config,
@@ -64,11 +64,11 @@ class TestSteamFreeGamesChecker(unittest.TestCase):
         mock_load_new.assert_called_once()
         mock_send.assert_called_once()
     
-    @patch('MailService.MailService.send_mail')
-    @patch('DealCollection.DealCollection.load_new_games')
+    @patch('MailService.MailService.sendMail')
+    @patch('DealCollection.DealCollection.loadNewGames')
     @patch('DealCollection.DealCollection.load_games')
     @patch('ItadApiClient.ItadApiClient.fetchFreeGames')
-    @patch('ConfigReader.ConfigReader.read_config_file')
+    @patch('ConfigReader.ConfigReader.readConfigFile')
     def test_fetch_games_with_no_new_games(
         self,
         mock_config,
@@ -91,11 +91,11 @@ class TestSteamFreeGamesChecker(unittest.TestCase):
         # Should still send email (with "None" message)
         mock_send.assert_called_once()
     
-    @patch('MailService.MailService.send_mail')
-    @patch('DealCollection.DealCollection.load_new_games')
+    @patch('MailService.MailService.sendMail')
+    @patch('DealCollection.DealCollection.loadNewGames')
     @patch('DealCollection.DealCollection.load_games')
     @patch('ItadApiClient.ItadApiClient.fetchFreeGames')
-    @patch('ConfigReader.ConfigReader.read_config_file')
+    @patch('ConfigReader.ConfigReader.readConfigFile')
     def test_fetch_games_prints_new_game_titles(
         self,
         mock_config,
@@ -144,11 +144,11 @@ class TestSteamFreeGamesChecker(unittest.TestCase):
         calls = [c for c in mock_print.call_args_list if 'Game' in str(c)]
         self.assertGreaterEqual(len(calls), 2)
     
-    @patch('MailService.MailService.send_mail')
-    @patch('DealCollection.DealCollection.load_new_games')
+    @patch('MailService.MailService.sendMail')
+    @patch('DealCollection.DealCollection.loadNewGames')
     @patch('DealCollection.DealCollection.load_games')
     @patch('ItadApiClient.ItadApiClient.fetchFreeGames')
-    @patch('ConfigReader.ConfigReader.read_config_file')
+    @patch('ConfigReader.ConfigReader.readConfigFile')
     def test_fetch_games_with_api_key_from_config(
         self,
         mock_config,
@@ -171,12 +171,12 @@ class TestSteamFreeGamesChecker(unittest.TestCase):
         # Verify API was called with correct key
         mock_api.assert_called_once_with("my_secret_key")
     
-    @patch('MailService.MailService.send_mail')
-    @patch('Message.Message.create_message')
-    @patch('DealCollection.DealCollection.load_new_games')
+    @patch('MailService.MailService.sendMail')
+    @patch('Message.Message.createMessage')
+    @patch('DealCollection.DealCollection.loadNewGames')
     @patch('DealCollection.DealCollection.load_games')
     @patch('ItadApiClient.ItadApiClient.fetchFreeGames')
-    @patch('ConfigReader.ConfigReader.read_config_file')
+    @patch('ConfigReader.ConfigReader.readConfigFile')
     def test_fetch_games_email_contains_message(
         self,
         mock_config,

@@ -19,7 +19,7 @@ class TestConfigReader(unittest.TestCase):
     def test_read_valid_config(self, mock_file):
         """Test reading a valid config file."""
         reader = ConfigReader()
-        config = reader.read_config_file()
+        config = reader.readConfigFile()
         
         self.assertIsInstance(config, dict)
         self.assertEqual(config["SMTPHost"], "smtp.gmail.com")
@@ -29,7 +29,7 @@ class TestConfigReader(unittest.TestCase):
     def test_read_empty_config(self, mock_file):
         """Test reading an empty config file."""
         reader = ConfigReader()
-        config = reader.read_config_file()
+        config = reader.readConfigFile()
         
         self.assertIsInstance(config, dict)
         self.assertEqual(len(config), 0)
@@ -41,7 +41,7 @@ class TestConfigReader(unittest.TestCase):
         reader = ConfigReader()
         # Mock the second open call to return empty dict
         with patch('builtins.open', mock_open(read_data='{}')):
-            config = reader.read_config_file()
+            config = reader.readConfigFile()
         
         self.assertEqual(config, {})
     
@@ -51,7 +51,7 @@ class TestConfigReader(unittest.TestCase):
         """Test that corrupted config file triggers recreation."""
         reader = ConfigReader()
         with patch('builtins.open', mock_open(read_data='{}')):
-            config = reader.read_config_file()
+            config = reader.readConfigFile()
         
         self.assertEqual(config, {})
     
@@ -59,7 +59,7 @@ class TestConfigReader(unittest.TestCase):
     def test_read_nested_config(self, mock_file):
         """Test reading config with nested structure."""
         reader = ConfigReader()
-        config = reader.read_config_file()
+        config = reader.readConfigFile()
         
         self.assertEqual(config["key"], "value")
         self.assertIn("nested", config)
@@ -76,7 +76,7 @@ class TestConfigReader(unittest.TestCase):
             # Patch open to use our temp file
             with patch('builtins.open', mock_open(read_data=json.dumps(test_config))):
                 reader = ConfigReader()
-                config = reader.read_config_file()
+                config = reader.readConfigFile()
                 self.assertEqual(config["test"], "value")
                 self.assertEqual(config["number"], 42)
         finally:

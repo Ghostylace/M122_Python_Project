@@ -36,13 +36,13 @@ class SteamFreeGamesChecker:
         client = Client()
         r = reader()
         d = DealCollection()
-        config = r.read_config_file()
+        config = r.readConfigFile()
         games = client.fetchFreeGames(config["APIKey"])
-        games = d.load_new_games(games)
+        games = d.loadNewGames(games)
         for game in games:
             if game.isFree:
                 print(game.title)
         m = Message(games)
         srv = MailService()
-        msg = m.create_message()
-        srv.send_mail(msg)
+        msg = m.createMessage()
+        srv.sendMail(msg)

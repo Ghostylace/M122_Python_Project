@@ -13,7 +13,7 @@ class ConfigReader:
     A class to read and load configuration from JSON files.
     """
     
-    def read_config_file(self):
+    def readConfigFile(self):
         """
         Read and parse the configuration file.
         
@@ -37,4 +37,4 @@ class ConfigReader:
                 pass
             with open("config.json", "w") as file:
                 json.dump({}, file, indent=2)
-            return self.read_config_file()
+            return self.readConfigFile()

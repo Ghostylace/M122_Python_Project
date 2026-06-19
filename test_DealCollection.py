@@ -116,7 +116,7 @@ class TestDealCollection(unittest.TestCase):
         self.assertEqual(games[1].id, '2')
     
     @patch('builtins.open', new_callable=mock_open, read_data='[]')
-    def test_load_new_games_empty_collection(self, mock_file):
+    def test_loadNewGames_empty_collection(self, mock_file):
         """Test adding games to empty collection."""
         collection = DealCollection()
         collection.games = []
@@ -134,13 +134,13 @@ class TestDealCollection(unittest.TestCase):
             expiry="2026-07-01T00:00:00Z"
         )
         
-        result = collection.load_new_games([new_game])
+        result = collection.loadNewGames([new_game])
         self.assertEqual(len(result), 1)
         self.assertEqual(result[0].id, "3")
     
     @patch('builtins.open', new_callable=mock_open, read_data='[]')
-    def test_load_new_games_detects_duplicates(self, mock_file):
-        """Test that load_new_games detects and skips duplicate IDs."""
+    def test_loadNewGames_detects_duplicates(self, mock_file):
+        """Test that loadNewGames detects and skips duplicate IDs."""
         collection = DealCollection()
         existing_game = Game(
             id="1",
@@ -169,11 +169,11 @@ class TestDealCollection(unittest.TestCase):
             expiry="2026-07-01T00:00:00Z"
         )
         
-        result = collection.load_new_games([duplicate_game])
+        result = collection.loadNewGames([duplicate_game])
         self.assertEqual(len(result), 0)  # Should be empty because duplicate
     
     @patch('builtins.open', new_callable=mock_open, read_data='[]')
-    def test_load_new_games_skips_paid_games(self, mock_file):
+    def test_loadNewGames_skips_paid_games(self, mock_file):
         """Test that paid games are not added to collection."""
         collection = DealCollection()
         collection.games = []
@@ -191,11 +191,11 @@ class TestDealCollection(unittest.TestCase):
             expiry="2026-07-01T00:00:00Z"
         )
         
-        result = collection.load_new_games([paid_game])
+        result = collection.loadNewGames([paid_game])
         self.assertEqual(len(result), 0)  # Paid games should not be added
     
     @patch('builtins.open', new_callable=mock_open, read_data='[]')
-    def test_load_new_games_mixed_free_and_paid(self, mock_file):
+    def test_loadNewGames_mixed_free_and_paid(self, mock_file):
         """Test loading mix of free and paid games."""
         collection = DealCollection()
         collection.games = []
@@ -226,22 +226,22 @@ class TestDealCollection(unittest.TestCase):
             expiry="2026-07-01T00:00:00Z"
         )
         
-        result = collection.load_new_games([free_game, paid_game])
+        result = collection.loadNewGames([free_game, paid_game])
         self.assertEqual(len(result), 1)  # Only free game
         self.assertEqual(result[0].id, "1")
     
     @patch('builtins.open', new_callable=mock_open, read_data='[]')
-    def test_save_games_empty_collection(self, mock_file):
+    def test_saveGames_empty_collection(self, mock_file):
         """Test saving empty game collection."""
         collection = DealCollection()
         collection.games = []
         
         # Should not raise an error
-        collection.save_games()
+        collection.saveGames()
         self.assertTrue(mock_file.called)
     
     @patch('builtins.open', new_callable=mock_open, read_data='[]')
-    def test_save_games_with_free_games(self, mock_file):
+    def test_saveGames_with_free_games(self, mock_file):
         """Test saving collection with free games."""
         collection = DealCollection()
         
@@ -259,12 +259,12 @@ class TestDealCollection(unittest.TestCase):
         )
         
         collection.games = [free_game]
-        collection.save_games()
+        collection.saveGames()
         
         self.assertTrue(mock_file.called)
     
     @patch('builtins.open', new_callable=mock_open, read_data='[]')
-    def test_save_games_excludes_paid_games(self, mock_file):
+    def test_saveGames_excludes_paid_games(self, mock_file):
         """Test that save only saves free games."""
         collection = DealCollection()
         
@@ -295,7 +295,7 @@ class TestDealCollection(unittest.TestCase):
         )
         
         collection.games = [free_game, paid_game]
-        collection.save_games()
+        collection.saveGames()
         
         # Get the data that was written
         handle = mock_file()

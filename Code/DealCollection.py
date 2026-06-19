@@ -26,9 +26,9 @@ class DealCollection:
         
         Loads the games from games.json on instantiation.
         """
-        self.games = self.load_games()
+        self.games = self.loadGames()
         
-    def load_games(self):
+    def loadGames(self):
         """
         Load games from the games.json file.
         
@@ -53,9 +53,9 @@ class DealCollection:
                 pass
             with open("games.json", "w") as file:
                 json.dump([], file, indent=2)
-            return self.load_games()
+            return self.loadGames()
     
-    def load_new_games(self, new_games):
+    def loadNewGames(self, new_games):
         """
         Add new free games to the collection and save.
         
@@ -80,10 +80,10 @@ class DealCollection:
                 new_games_to_return.append(new_game)
                 existing_ids.add(new_game.id)
 
-        self.save_games()
+        self.saveGames()
         return new_games_to_return
     
-    def save_games(self):
+    def saveGames(self):
         """
         Save all free games in the collection to games.json.
         
@@ -120,4 +120,4 @@ class DealCollection:
                 pass
             with open("games.json", "w") as file:
                 json.dump([], file, indent=2)
-            self.save_games()
+            self.saveGames()

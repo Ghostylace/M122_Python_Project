@@ -6,9 +6,21 @@ This python project gets new free games from steam daily and sends an email to t
 ## Setup
 
 1. Check if all files are installed
-2. Install a virtual environment
+2. Create a virtual environment in the root folder
 3. Start up the venv and install all requirements from requirements.txt
 4. Change the user email in `config.json` to your own email
+
+### Commands
+
+- Start .venv from root folder
+```Bash
+.\.venv\Scripts\Activate.ps1
+```
+
+- Install packages from requirements.txt 
+```Bash
+pip install -r .\Sources\requirements.txt
+```
 
 ## Project requirements
 

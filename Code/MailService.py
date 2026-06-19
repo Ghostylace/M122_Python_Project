@@ -31,9 +31,9 @@ class MailService:
         or corrupted, it will be deleted and recreated, then the
         configuration will be loaded again.
         """
-        self._load_config()
+        self._loadConfig()
     
-    def _load_config(self):
+    def _loadConfig(self):
         """
         Load SMTP configuration from config.json.
         
@@ -56,9 +56,9 @@ class MailService:
                 pass
             with open("config.json", "w") as file:
                 json.dump({}, file, indent=2)
-            self._load_config()
+            self._loadConfig()
 
-    def send_mail(self, body):
+    def sendMail(self, body):
         """
         Compose and send an email.
         

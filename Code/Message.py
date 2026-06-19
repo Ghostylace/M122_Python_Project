@@ -23,7 +23,7 @@ class Message:
         """
         self.games = games
         
-    def create_message(self):
+    def createMessage(self):
         """
         Generate a formatted message with free games.
         
@@ -42,9 +42,11 @@ class Message:
                 found_free_games = True
                 message_lines.extend([
                     "",
-                    f"- Title: {game.title}",
-                    f"  Link: {game.url}",
-                    f"  Expiration date: {game.expiry[:10]}"
+                    f"======================================",
+                    f"Title: {game.title}",
+                    f"Link: {game.url}",
+                    f"Expiration date: {game.expiry[:10]}",
+                    f"======================================"
                 ])
         if not found_free_games:
             message_lines.append("None")

@@ -19,38 +19,28 @@ class Game {
 }
 ```
 
+### Message class
+
+```TS
+class Message {
+    games: Game[]
+
+    constructor(games: Game[])
+
+    createMessage(): string
+}
+```
+
 ### DealCollection class
 
 ```TS
 class DealCollection {
     games: Game[]
-    fetchedAt: Date
-    source: string
 
-    addGame(game: Game): void
+    load_games() : Game[]
+    loadNewGames(new_games: Game[]) : Game[]
+    saveGames(): void
     getFreeGames(): Game[]
-    getExpiringSoon(days: number): Game[]
-}
-```
-
-### ApiResponse classes
-
-```TS
-class ItadGameDto {
-    id: string
-    slug: string
-    title: string
-    type: string
-    mature: boolean
-    isFree: boolean
-    price: float
-    cut: float
-    url: string
-    expiry?: string
-}
-
-class ItadSearchResponse {
-    data: ItadGameDto[]
 }
 ```
 
@@ -60,22 +50,7 @@ class ItadSearchResponse {
 
 ```TS
 class ItadApiClient {
-    apiKey: string
-
-    constructor(apiKey: string)
-
-    fetchFreeGames(params: ItadSearchParams): Promise<ItadSearchResponse>
-    fetchGameDetails(gameId: string): Promise<ItadGameDto>
-}
-```
-
-### ItadSearchParams class
-
-```TS
-class ItadSearchParams {
-    country: string          // ISO country code for price conversion
-    shops: int         // e.g. 61 for "steam"
-    sort: string
+    fetchFreeGames(apiKey: string): Game[]
 }
 ```
 
@@ -83,91 +58,38 @@ class ItadSearchParams {
 
 ```TS
 class SteamFreeGamesChecker {
-    apiClient: ItadApiClient
-    cache: GameCache
-    formatter: GameFormatter
-    notifier?: NotificationService
-
-    constructor(apiClient: ItadApiClient, cache: GameCache, formatter: GameFormatter, notifier?: NotificationService)
-
-    updateFreeGames(): Promise<DealCollection>
-    getLatestFreeGames(): DealCollection
-    getFreeGamesByPlatform(platform: string): Game[]
-    getExpiringOffers(days: number): Game[]
+    fetchGames(): void
 }
 ```
 
-### GameCache class
+### GameMapper class
 
 ```TS
-class GameCache {
-    data: DealCollection
-    ttlMinutes: number
-
-    constructor(ttlMinutes: number)
-
-    load(): DealCollection | null
-    save(collection: DealCollection): void
-    isExpired(): boolean
+class GameMapper {
+    map(jsonGame): Game
+    mapMultipleFromJson(json): Game[]
 }
 ```
 
-### GameFormatter class
+### MailService class
 
 ```TS
-class GameFormatter {
-    formatList(collection: DealCollection): string
-    formatForDisplay(game: Game): string
-    formatSummary(collection: DealCollection): string
-}
-```
-
-### NotificationService class (optional)
-
-```TS
-class NotificationService {
-    send(message: string): Promise<void>
-}
-```
-
-## Adapter / Mapper classes
-
-### ItadToGameMapper class
-
-```TS
-class ItadToGameMapper {
-    map(dto: ItadGameDto): Game
+class MailService {
+    _loadConfig(): void
+    sendMail(body: string): void
 }
 ```
 
 ## Utility classes
 
-### Config class
+### ConfigReader class
 
 ```TS
-class AppConfig {
+class ConfigReader {
     itadApiKey: string
     filter: string
     country: string
+
+    readConfigFile(): string
 }
 ```
-
-## Class relationships
-
-- `SteamFreeGamesChecker` depends on `ItadApiClient`, `GameCache`, `GameFormatter`, and optionally `NotificationService`.
-- `ItadApiClient` retrieves raw data from the IsThereAnyDeal API.
-- `ItadToGameMapper` converts raw API DTOs into domain `Game` objects.
-- `DealCollection` holds a list of `Game` objects and provides helpers for filtering free and expiring offers.
-- `GameCache` stores the latest `DealCollection` to avoid unnecessary API calls.
-- `GameFormatter` prepares human-readable output for the UI or console.
-- `NotificationService` can send alerts for newly found or expiring free games.
-
-## Example workflow
-
-1. `SteamFreeGamesChecker.updateFreeGames()` checks `GameCache.isExpired()`.
-2. If the cache is expired, it calls `ItadApiClient.fetchFreeGames()`.
-3. The raw `ItadSearchResponse` is mapped to `DealCollection` via `ItadToGameMapper`.
-4. The new collection is saved with `GameCache.save()`.
-5. `GameFormatter.formatList()` renders the free games list.
-6. If configured, `NotificationService.send()` dispatches new free game alerts.
-

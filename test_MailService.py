@@ -39,7 +39,7 @@ class TestMailService(unittest.TestCase):
     
     @patch('builtins.open', new_callable=mock_open)
     @patch('smtplib.SMTP')
-    def test_send_mail_success(self, mock_smtp_class, mock_file):
+    def test_sendMail_success(self, mock_smtp_class, mock_file):
         """Test sending email successfully."""
         mock_file.return_value.read.return_value = json.dumps(self.valid_config)
         
@@ -49,7 +49,7 @@ class TestMailService(unittest.TestCase):
         
         with patch('builtins.open', mock_open(read_data=json.dumps(self.valid_config))):
             service = MailService()
-            service.send_mail("Test email body")
+            service.sendMail("Test email body")
         
         # Verify SMTP operations were called
         mock_smtp_instance.starttls.assert_called_once()
@@ -58,15 +58,15 @@ class TestMailService(unittest.TestCase):
     
     @patch('builtins.open', new_callable=mock_open)
     @patch('smtplib.SMTP')
-    def test_send_mail_uses_correct_credentials(self, mock_smtp_class, mock_file):
-        """Test that send_mail uses correct credentials."""
+    def test_sendMail_uses_correct_credentials(self, mock_smtp_class, mock_file):
+        """Test that sendMail uses correct credentials."""
         mock_file.return_value.read.return_value = json.dumps(self.valid_config)
         mock_smtp_instance = MagicMock()
         mock_smtp_class.return_value.__enter__.return_value = mock_smtp_instance
         
         with patch('builtins.open', mock_open(read_data=json.dumps(self.valid_config))):
             service = MailService()
-            service.send_mail("Test body")
+            service.sendMail("Test body")
             
             # Verify login used correct credentials
             call_args = mock_smtp_instance.login.call_args
@@ -75,7 +75,7 @@ class TestMailService(unittest.TestCase):
     
     @patch('builtins.open', new_callable=mock_open)
     @patch('smtplib.SMTP')
-    def test_send_mail_message_attributes(self, mock_smtp_class, mock_file):
+    def test_sendMail_message_attributes(self, mock_smtp_class, mock_file):
         """Test that email message has correct attributes."""
         mock_file.return_value.read.return_value = json.dumps(self.valid_config)
         mock_smtp_instance = MagicMock()
@@ -83,7 +83,7 @@ class TestMailService(unittest.TestCase):
         
         with patch('builtins.open', mock_open(read_data=json.dumps(self.valid_config))):
             service = MailService()
-            service.send_mail("Test body content")
+            service.sendMail("Test body content")
             
             # Verify send_message was called
             self.assertTrue(mock_smtp_instance.send_message.called)
@@ -96,7 +96,7 @@ class TestMailService(unittest.TestCase):
     
     @patch('builtins.open', new_callable=mock_open)
     @patch('smtplib.SMTP')
-    def test_send_mail_with_different_body(self, mock_smtp_class, mock_file):
+    def test_sendMail_with_different_body(self, mock_smtp_class, mock_file):
         """Test sending email with different body content."""
         mock_file.return_value.read.return_value = json.dumps(self.valid_config)
         mock_smtp_instance = MagicMock()
@@ -113,7 +113,7 @@ class TestMailService(unittest.TestCase):
             
             for body in test_bodies:
                 mock_smtp_instance.reset_mock()
-                service.send_mail(body)
+                service.sendMail(body)
                 self.assertTrue(mock_smtp_instance.send_message.called)
 
 

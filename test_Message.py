@@ -54,7 +54,7 @@ class TestMessage(unittest.TestCase):
     def test_message_with_single_free_game(self):
         """Test creating a message with a single free game."""
         message = Message([self.free_game1])
-        msg_text = message.create_message()
+        msg_text = message.createMessage()
         
         self.assertIn("Current free games:", msg_text)
         self.assertIn("Free Game 1", msg_text)
@@ -64,7 +64,7 @@ class TestMessage(unittest.TestCase):
     def test_message_with_multiple_free_games(self):
         """Test creating a message with multiple free games."""
         message = Message([self.free_game1, self.free_game2])
-        msg_text = message.create_message()
+        msg_text = message.createMessage()
         
         self.assertIn("Current free games:", msg_text)
         self.assertIn("Free Game 1", msg_text)
@@ -75,7 +75,7 @@ class TestMessage(unittest.TestCase):
     def test_message_excludes_paid_games(self):
         """Test that paid games are not included in the message."""
         message = Message([self.free_game1, self.paid_game])
-        msg_text = message.create_message()
+        msg_text = message.createMessage()
         
         self.assertIn("Free Game 1", msg_text)
         self.assertNotIn("Paid Game", msg_text)
@@ -83,7 +83,7 @@ class TestMessage(unittest.TestCase):
     def test_message_with_no_free_games(self):
         """Test creating a message when no free games exist."""
         message = Message([self.paid_game])
-        msg_text = message.create_message()
+        msg_text = message.createMessage()
         
         self.assertIn("Current free games:", msg_text)
         self.assertIn("None", msg_text)
@@ -92,7 +92,7 @@ class TestMessage(unittest.TestCase):
     def test_message_with_empty_list(self):
         """Test creating a message with empty game list."""
         message = Message([])
-        msg_text = message.create_message()
+        msg_text = message.createMessage()
         
         self.assertIn("Current free games:", msg_text)
         self.assertIn("None", msg_text)
@@ -100,28 +100,28 @@ class TestMessage(unittest.TestCase):
     def test_message_format_includes_title_field(self):
         """Test message format includes Title field."""
         message = Message([self.free_game1])
-        msg_text = message.create_message()
+        msg_text = message.createMessage()
         
         self.assertIn("Title:", msg_text)
     
     def test_message_format_includes_link_field(self):
         """Test message format includes Link field."""
         message = Message([self.free_game1])
-        msg_text = message.create_message()
+        msg_text = message.createMessage()
         
         self.assertIn("Link:", msg_text)
     
     def test_message_format_includes_expiration_field(self):
         """Test message format includes Expiration date field."""
         message = Message([self.free_game1])
-        msg_text = message.create_message()
+        msg_text = message.createMessage()
         
         self.assertIn("Expiration date:", msg_text)
     
     def test_message_date_formatting_date_only(self):
         """Test that expiration date is formatted as date only (YYYY-MM-DD)."""
         message = Message([self.free_game1])
-        msg_text = message.create_message()
+        msg_text = message.createMessage()
         
         # Should have date in YYYY-MM-DD format
         self.assertIn("2026-07-01", msg_text)
@@ -132,7 +132,7 @@ class TestMessage(unittest.TestCase):
     def test_message_date_formatting_consistency(self):
         """Test that all dates are formatted consistently."""
         message = Message([self.free_game1, self.free_game2])
-        msg_text = message.create_message()
+        msg_text = message.createMessage()
         
         # Both should be in YYYY-MM-DD format
         self.assertIn("2026-07-01", msg_text)
@@ -141,7 +141,7 @@ class TestMessage(unittest.TestCase):
     def test_message_structure_multiline(self):
         """Test that message has proper multiline structure."""
         message = Message([self.free_game1])
-        msg_text = message.create_message()
+        msg_text = message.createMessage()
         
         lines = msg_text.split('\n')
         # Should have multiple lines with content
@@ -151,7 +151,7 @@ class TestMessage(unittest.TestCase):
         """Test that mixed game list only shows free games."""
         games = [self.free_game1, self.paid_game, self.free_game2, self.paid_game]
         message = Message(games)
-        msg_text = message.create_message()
+        msg_text = message.createMessage()
         
         # Only free games should appear
         self.assertIn("Free Game 1", msg_text)
